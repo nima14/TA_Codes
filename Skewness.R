@@ -1,7 +1,7 @@
 library(moments)
-
 library(fGarch)
-
+library(ggfortify)
+library(EnvStats)
 set.seed(45)
 N <- 10000
 
@@ -72,4 +72,18 @@ m2_z_skewed=sum((z_skewed-mean_z_skewed)^2)/(n-1)
 
 skew_z=m3_z/m2_z^(3/2)
 skew_z_skewed=m3_z_skewed/m2_z_skewed^(3/2)
+
+#-------------------------------------------
+#Removing Skewness
+x=rsnorm(10000, mean = 100, sd = 5, xi = 5)
+skewness(x)
+
+x_log <- log(x)
+skewness(x_log)
+
+
+par(mfrow=c(2,1))
+p=autoplot(density(x), fill = 'blue')
+autoplot(density(x_log), fill = 'green')
+
 

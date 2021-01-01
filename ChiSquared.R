@@ -44,4 +44,12 @@ ggdistribution(dchisq, seq(0, 20, 0.1), df = 10, colour = 'red', p = p)
 #------------------------------------
 # Using tables in books
 1- pchisq(0.71,4)
+qchisq(0.05,4)
+#-------------------------------------
+#Sum of Chi_2s
 
+C2_1 <- rchisq(100000,4)
+C2_2 <- rchisq(100000,5)
+Sum_C2=C2_1+C2_2
+mean(Sum_C2)
+var(Sum_C2)
