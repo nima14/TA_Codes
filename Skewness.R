@@ -6,7 +6,7 @@ set.seed(45)
 N <- 10000
 
 #xi: 1 -> center , Greater than 1 -> Right Skewed , Lower than 1 -> Left Skewed
-x=rsnorm(N, mean = 0, sd = 5, xi = 1)
+x=rsnorm(N, mean = 0, sd = 5, xi = 2)
 
 hist(x, 
      probability=T, 
@@ -18,6 +18,8 @@ lines(density(x,bw=1), col='red', lwd=3)
 print(skewness(x))
 #-----------------------------------------------
 #Manual
+
+#Page 19
 mean_x=mean(x)
 n=length(x)
 m3=sum((x-mean_x)^3)/n
@@ -82,8 +84,6 @@ x_log <- log(x)
 skewness(x_log)
 
 
-par(mfrow=c(2,1))
-p=autoplot(density(x), fill = 'blue')
-autoplot(density(x_log), fill = 'green')
+
 
 

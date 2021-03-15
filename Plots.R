@@ -11,7 +11,10 @@ head(df)
 
 # Change the width of bins
 ggplot(df, aes(x=weight)) + 
-  geom_histogram(binwidth=5,color="black", fill="cyan")
+  geom_histogram(binwidth=2,color="black", fill="cyan")
+
+ggplot(df, aes(x=weight)) + 
+  geom_histogram(bins=5,color="black", fill="cyan")
 
 #bins=10
 #binwidth=20

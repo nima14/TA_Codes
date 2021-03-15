@@ -36,4 +36,4 @@ var(rt(100000,100))
 
 # Using tables in books
 1- pt(2.571,5)
-qt(1-0.025,5)
+qt(1-0.0025,17)

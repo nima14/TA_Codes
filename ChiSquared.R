@@ -43,8 +43,8 @@ ggdistribution(dchisq, seq(0, 20, 0.1), df = 10, colour = 'red', p = p)
 
 #------------------------------------
 # Using tables in books
-1- pchisq(0.71,4)
-qchisq(0.05,4)
+1- pchisq(9.342,10)
+qchisq(1-0.99,20)
 #-------------------------------------
 #Sum of Chi_2s
 
