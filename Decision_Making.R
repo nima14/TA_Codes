@@ -80,6 +80,11 @@ Prior_2=1/3
 
 #-----------------------------------------------
 
+# https://www.mathsisfun.com/data/probability-events-conditional.html
+
+# https://seeing-theory.brown.edu/bayesian-inference/index.html#section1
+
+#Calculating Posterior
 #Page 190
 
 mean_sample=74.5
@@ -87,8 +92,6 @@ size_sample=4
 
 std_sample=std/sqrt(size_sample)
 
-mean_sample_z_1= (mean_sample - mean_1)/std_sample
-mean_sample_z_2= (mean_sample - mean_2)/std_sample
 
 
 Likelihood <- function(mean_sample,mean,std) 
@@ -106,3 +109,16 @@ Posterior_1 = (Prior_1 * Likelihood_1)/ ( (Prior_1*Likelihood_1) + (Prior_2*Like
 
 Posterior_2 = (Prior_2 * Likelihood_2)/ ( (Prior_1*Likelihood_1) + (Prior_2*Likelihood_2))
 
+#--------------------------------------
+
+#E(l) based on Prior
+
+#Page 187
+
+
+
+(E_1_A1 * Posterior_1) + (E_2_A1 * Posterior_2)
+
+(E_A2 * Posterior_1) + (E_A2 * Posterior_2)
+
+(E_1_A3 * Posterior_1) + (E_2_A3 * Posterior_2)
