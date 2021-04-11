@@ -23,6 +23,10 @@ p_value <- 2*pt(-abs(t0),n-1)
 
 conf_int <- c(mean_sample - qt(0.975,n-1)*S_sample,mean_sample + qt(0.975,n-1)*S_sample)
 
+acc_range <- c(- qt(0.975,n-1), qt(0.975,n-1))
+
+acc_range_for_Xbar <- c(mu_0 - qt(0.975,n-1)*S_sample,mu_0 + qt(0.975,n-1)*S_sample)
+
 #----------------------------------------------
 #one.sided
 
@@ -33,6 +37,10 @@ t0 <- (mean_sample - mu_0)/ S_sample
 p_value <- pt(t0,n-1)
 
 conf_int <- c(-Inf,mean_sample + qt(0.95,n-1)*S_sample)
+
+acc_range <- c(- qt(0.95,n-1), Inf)
+
+acc_range_for_Xbar <- c(mu_0 - qt(0.95,n-1)*S_sample,Inf)
 
 
 #---------------------------------------------
@@ -48,6 +56,11 @@ p_value <- 2*pnorm(-abs(z0))
 
 conf_int <- c(mean_sample - qnorm(0.975)*S_sample,mean_sample + qnorm(0.975)*S_sample)
 
+acc_range <- c(- qnorm(0.975), qnorm(0.975))
+
+acc_range_for_Xbar <- c(mu_0 - qnorm(0.975)*S_sample,mu_0 + qnorm(0.975)*S_sample)
+
+
 
 #---------------------------------
 
@@ -55,6 +68,7 @@ conf_int <- c(mean_sample - qnorm(0.975)*S_sample,mean_sample + qnorm(0.975)*S_s
 
 #One.sided
 var_0 <- 121
+#var_0 <- 70
 S2 <- var(women$height_cm)
 
 library(EnvStats)
@@ -69,10 +83,15 @@ p_value <- 1- pchisq(ch_0,n-1)
 
 conf_int <- c(S2*(n-1)/qchisq(0.95,n-1),Inf)
 
+acc_range <- c(0,qchisq(0.95,n-1))
+
+acc_range_for_Xbar <- c(0,qchisq(0.95,n-1)*var_0/(n-1))
+
 #---------------------------------------------
 
 #two.sided
 var_0 <- 121
+var_0 <- 60
 S2 <- var(women$height_cm)
 
 varTest(women$height_cm,sigma.squared =var_0,alternative = 'two.sided',conf.level = 0.95)
@@ -84,3 +103,7 @@ p_value <- 2*(1- pchisq(ch_0,n-1) )
 
 
 conf_int <- c(S2*(n-1)/qchisq(0.975,n-1),S2*(n-1)/qchisq(0.025,n-1))
+
+acc_range <- c(qchisq(0.025,n-1),qchisq(0.975,n-1))
+
+acc_range_for_Xbar <- c(qchisq(0.025,n-1)*var_0/(n-1),qchisq(0.975,n-1)*var_0/(n-1))
