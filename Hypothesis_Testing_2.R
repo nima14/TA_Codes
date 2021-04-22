@@ -22,11 +22,15 @@ ny <- length(Old_Films$IMDB_Rating)
 t.test(New_Films$IMDB_Rating,Old_Films$IMDB_Rating,var.equal = TRUE)
 
 Sp <- sqrt( ( (nx-1)*(Sx^2) + (ny-1)*(Sy^2) )/ (nx+ny-2) )
-statistics_1 <- (X_bar - Y_bar)/(Sp*sqrt((1/nx)+(1/ny)))
+statistic_1 <- (X_bar - Y_bar)/(Sp*sqrt((1/nx)+(1/ny)))
 
 df_1 <- nx+ny-2
 
-pvalue_1 <- pt(abs(statistics_1),df_1,lower.tail = FALSE)*2
+alpha=0.05
+
+acc_range_1 <- c(- qt(alpha/2,df_1,lower.tail =FALSE),qt(alpha/2,df_1,lower.tail =FALSE))
+
+pvalue_1 <- pt(abs(statistic_1),df_1,lower.tail = FALSE)*2
 
 
 
@@ -34,12 +38,14 @@ pvalue_1 <- pt(abs(statistics_1),df_1,lower.tail = FALSE)*2
 
 t.test(New_Films$IMDB_Rating,Old_Films$IMDB_Rating,var.equal = FALSE)
 
-statistics_2 <- (X_bar - Y_bar)/(sqrt(((Sx^2)/nx)+((Sy^2)/ny)))
+statistic_2 <- (X_bar - Y_bar)/(sqrt(((Sx^2)/nx)+((Sy^2)/ny)))
 
 df_2 <- ( ((((Sx^2)/nx) + ((Sy^2)/ny))^2)/ ( (((Sx^2)/nx)^2)/(nx-1) + (((Sy^2)/ny)^2)/(ny-1) ) ) 
 
+acc_range_2 <- c(- qt(alpha/2,df_2,lower.tail =FALSE),qt(alpha/2,df_2,lower.tail =FALSE))
 
-pvalue_2 <- pt(abs(statistics_2),df_2,lower.tail = FALSE)*2
+
+pvalue_2 <- pt(abs(statistic_2),df_2,lower.tail = FALSE)*2
 
 #TTest Paired Data
 
@@ -57,11 +63,35 @@ Sd <- sd(D)
 
 t.test(after,before,paired = TRUE)
 
-statistics_3 <- D_bar/(Sd/sqrt(n))
+statistic_3 <- D_bar/(Sd/sqrt(n))
 
 df_3 <- n-1
 
-pvalue_3 <-  pt(abs(statistics_3),df_3,lower.tail = FALSE)*2
+acc_range_3 <- c(- qt(alpha/2,df_3,lower.tail =FALSE),qt(alpha/2,df_3,lower.tail =FALSE))
+
+
+pvalue_3 <-  pt(abs(statistic_3),df_3,lower.tail = FALSE)*2
+
+
+
+#Z Test for Proportion 
+
+nx <- 50
+ny<- 70
+
+Ax <- 22
+Ay <- 18
+
+Px <- Ax/nx
+Py <- Ay/ny
+
+Po <- (Ax+Ay)/(nx+ny)
+
+statistic_4 <- (Px-Py) / sqrt(((Po*(1-Po))/nx) + ((Po*(1-Po))/ny))
+
+acc_range_4 <- c(-qnorm(alpha/2,lower.tail = FALSE) , qnorm(alpha/2,lower.tail = FALSE) )
+
+
 
 
 
@@ -69,12 +99,16 @@ pvalue_3 <-  pt(abs(statistics_3),df_3,lower.tail = FALSE)*2
 
 var.test(New_Films$IMDB_Rating,Old_Films$IMDB_Rating)
 
-statistic_4<- (Sx^2)/(Sy^2)
+statistic_5<- (Sx^2)/(Sy^2)
 
 num_df <- nx-1
 denom_df <- ny-1
 
-pvalue_4 <- pf(statistic_4,num_df,denom_df)*2
+acc_range_5 <- c(qf(1-(alpha/2),num_df,denom_df,lower.tail = FALSE),qf(alpha/2,num_df,denom_df,lower.tail = FALSE))
+c(1/qf(alpha/2,denom_df,num_df,lower.tail = FALSE),qf(alpha/2,num_df,denom_df,lower.tail = FALSE))
+
+
+pvalue_5 <- pf(statistic_4,num_df,denom_df)*2
 
 
 
@@ -82,10 +116,13 @@ pvalue_4 <- pf(statistic_4,num_df,denom_df)*2
 
 var.test(Old_Films$IMDB_Rating,New_Films$IMDB_Rating)
 
-statistic_5<- (Sy^2)/(Sx^2)
+statistic_6<- (Sy^2)/(Sx^2)
 
 num_df <- ny-1
 denom_df <- nx-1
 
-pvalue_5 <- pf(statistic_5,num_df,denom_df,lower.tail = FALSE)*2
+
+acc_range_6 <- c(qf(1-(alpha/2),num_df,denom_df,lower.tail = FALSE),qf(alpha/2,num_df,denom_df,lower.tail = FALSE))
+
+pvalue_6 <- pf(statistic_5,num_df,denom_df,lower.tail = FALSE)*2
 
