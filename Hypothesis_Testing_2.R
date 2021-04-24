@@ -101,6 +101,9 @@ var.test(New_Films$IMDB_Rating,Old_Films$IMDB_Rating)
 
 statistic_5<- (Sx^2)/(Sy^2)
 
+nx <- length(New_Films$IMDB_Rating)
+ny <- length(Old_Films$IMDB_Rating)
+
 num_df <- nx-1
 denom_df <- ny-1
 
@@ -108,7 +111,7 @@ acc_range_5 <- c(qf(1-(alpha/2),num_df,denom_df,lower.tail = FALSE),qf(alpha/2,n
 c(1/qf(alpha/2,denom_df,num_df,lower.tail = FALSE),qf(alpha/2,num_df,denom_df,lower.tail = FALSE))
 
 
-pvalue_5 <- pf(statistic_4,num_df,denom_df)*2
+pvalue_5 <- pf(statistic_5,num_df,denom_df)*2
 
 
 
@@ -117,6 +120,9 @@ pvalue_5 <- pf(statistic_4,num_df,denom_df)*2
 var.test(Old_Films$IMDB_Rating,New_Films$IMDB_Rating)
 
 statistic_6<- (Sy^2)/(Sx^2)
+
+
+
 
 num_df <- ny-1
 denom_df <- nx-1
