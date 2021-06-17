@@ -29,7 +29,7 @@ library(dplyr)
 
 df_meanY <- df %>% group_by(x) %>% summarise(Mean_Y=mean(y))
 
-df_meanY <-data.frame(x=rep(df_meanY$x,2),Mean_Y=rep(df_meanY$Mean_Y,2))
+df_meanY <-data.frame(x=rep(df_meanY$x,3),Mean_Y=rep(df_meanY$Mean_Y,3))
 
 pred_Y <- predict(fit)
 
