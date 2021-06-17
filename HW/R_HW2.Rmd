@@ -1,0 +1,158 @@
+---
+title: "Untitled"
+author: "Nima Taghidoost"
+date: "5/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+set.seed(810994068)
+```
+
+# Question 1
+
+```{r}
+data.frame(FirstName=c('Nima','Amin','Vahid')
+          ,LastName=c('Taghidoost','Alizadeh','Mohammadi')
+          ,Gender=c('Male','Male','Male'))
+```
+
+
+# Question 2
+
+```{r}
+
+df <- read.csv('D:/TA/Games.csv')
+```
+
+# Question 3 
+
+```{r}
+head(df$Name)
+```
+
+# Question 4
+
+```{r}
+df[c(4485,4692),c('Name','Platform')]
+```
+
+# Question 5
+
+```{r}
+df[df$Name=='Counter-Strike','Platform']
+```
+
+# Question 6
+
+```{r}
+q6 <- df[df$Year==2012 & df$Platform=='PS3'
+    & df$Genre !='Action','Name']
+
+head(q6,5)
+```
+
+# Question 7
+
+```{r}
+df$Sales <- df$NA_Sales + df$EU_Sales + df$JP_Sales + df$Other_Sales
+```
+
+# Question 8
+
+```{r ,message = FALSE}
+library(dplyr)
+df %>% group_by(Genre) %>% summarise(sum(Sales))
+```
+
+# Question 9
+
+```{r}
+library(dplyr)
+df %>% group_by(Publisher) %>% summarise(MeanSale=mean(Sales)) %>% arrange(-MeanSale)
+```
+
+# Question 10
+
+```{r}
+PS3_Sales <- df[df$Platform=='PS3','Sales']
+
+PS3_Sales_Sample <- sample(PS3_Sales,200)
+
+t.test(PS3_Sales_Sample,mu=0.65,alternative = 'greater',conf.level = 0.95)
+
+```
+PValue=0.29 > alpha=0.05
+We can not reject H0 
+
+
+# Question 11
+
+```{r}
+statistic.Mean.OneParam <- function(sample,mu0){
+  mean_sample <- mean(sample)
+  S <- sd(sample)
+  n <- length(sample)
+  
+  
+  
+  statistic <- (mean_sample - mu0)/ (S/sqrt(n))
+  
+  return(statistic)
+  
+} 
+
+statistic.Mean.OneParam(PS3_Sales_Sample,0.65)
+
+
+```
+They're the same!
+
+# Question 12
+
+```{r,message = FALSE}
+library(EnvStats)
+
+varTest(PS3_Sales_Sample,sigma.squared =2,alternative = 'two.sided',conf.level = 0.90)
+
+
+```
+PValue=0 < alpha=0.1
+We reject H0 
+
+# Question 13
+
+```{r}
+Sports_Sales <- df[df$Genre=='Sports','Sales']
+
+Action_Sales <- df[df$Genre=='Action','Sales']
+
+Sports_Sales_Sample <- sample(Sports_Sales,300)
+Action_Sales_Sample <- sample(Action_Sales,400)
+
+t.test(Sports_Sales_Sample,Action_Sales_Sample)
+
+
+```
+PValue=0.66 > alpha=0.05
+We can not reject H0 
+
+# Question 14
+
+```{r}
+Sports_Sales <- df[df$Genre=='Sports','Sales']
+
+Action_Sales <- df[df$Genre=='Action','Sales']
+
+Sports_Sales_Sample <- sample(Sports_Sales,300)
+Action_Sales_Sample <- sample(Action_Sales,400)
+
+var.test(Sports_Sales_Sample,Action_Sales_Sample)
+
+
+```
+PValue=0 < alpha=0.05
+We reject H0 
